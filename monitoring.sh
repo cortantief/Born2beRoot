@@ -47,7 +47,7 @@ print_message "Network" "$IP_ADDR ($(ip addr show | grep $IP_ADDR -B 1 | head -n
 
 # https://stackoverflow.com/questions/4614775/converting-hex-to-decimal-in-awk-or-sed/32437561
 
-print_message "Sudo" "$(cat $SUDO_SEQ_FILE | awk -Wposix '{printf("%d\n","0x" $1)}') cmd"
+print_message "Sudo" "$(if test -f $SUDO_SEQ_FILE; then cat $SUDO_SEQ_FILE | awk -Wposix '{printf("%d\n","0x" $1)}'; else echo 0; fi) cmd"
 
 wall < $FILEO
 rm -rf $FILEO
